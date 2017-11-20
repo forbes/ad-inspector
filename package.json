@@ -6,14 +6,20 @@
   "scripts": {
     "start": "http-server ./src/"
   },
-  "keywords": ["GPT", "Bookmarklet", "Ads", "Google Tag","Google Publisher Tag" ],
+  "keywords": [
+    "GPT",
+    "Bookmarklet",
+    "Ads",
+    "Google Tag",
+    "Google Publisher Tag"
+  ],
   "author": "Anthony Giallella",
   "license": "MIT",
   "devDependencies": {
-	"http-server": "^0.10.0"
+    "http-server": "^0.10.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.forbes.com/agiallella/gpt-bookmarklet-2.git"
+    "url": "https://github.com/forbes/gpt-bookmarklet"
   }
 }
