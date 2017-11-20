@@ -1,0 +1,19 @@
+{
+  "name": "gpt-bookmarklet-new",
+  "version": "0.1.0",
+  "description": "Provides functionality for bookmarkable script to highlight GPT based ads on a page",
+  "main": "gpt-bookmarklet.js",
+  "scripts": {
+    "start": "http-server ./src/"
+  },
+  "keywords": ["GPT", "Bookmarklet", "Ads", "Google Tag","Google Publisher Tag" ],
+  "author": "Anthony Giallella",
+  "license": "MIT",
+  "devDependencies": {
+	"http-server": "^0.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.forbes.com/agiallella/gpt-bookmarklet-2.git"
+  }
+}
