@@ -14,7 +14,7 @@ Create a bookmark in your browser. Paste the following into the "URL" field:
 ```
 javascript:(function() {
 	var script = document.createElement('script');
-	script.src = 'your-hosted-filepath/gpt-bookmarklet.js';
+	script.src = 'your-hosted-filepath/gpt-bookmark.js';
 	script.id = 'gpt-bookmarklet';
 	document.body.appendChild(script);
 })();
