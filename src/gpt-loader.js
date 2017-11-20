@@ -2,7 +2,7 @@
  * GPT Bookmarklet -- This bookmarklet loads a helpful display of ad related data
  *
  * The code to be inserted in a bookmark lives here:
- * https://github.com/forbes/gpt-bookmarklet/gpt-bookmark.js
+ * https://forbes.github.io/gpt-bookmarklet/src/gpt-bookmark.js
  *
  * See the github page for more information:
  * https://github.com/forbes/gpt-bookmarklet
