@@ -29,7 +29,7 @@
 			marginLeft: '0%',
 			marginRight: '20px',
 			background: 'white',
-			border: 'rgb(224, 199, 89)',
+			border: '#e0c759',
 			color: 'black',
 			padding: '5px',
 			font: '11px "Lucida Grande"',
@@ -38,7 +38,7 @@
 		},
 		secondButtonStyle:{
 			background: 'white',
-			border: 'rgb(224, 199, 89)',
+			border: '#e0c759',
 			color: 'black',
 			padding: '5px',
 			marginRight: '56%',
@@ -48,7 +48,7 @@
 		},
 		thirdButtonStyle:{
 			background: 'white',
-			border: 'rgb(224, 199, 89)',
+			border: '#e0c759',
 			color: 'black',
 			padding: '5px',
 			display: 'inline-block',
@@ -56,8 +56,8 @@
 			cursor: 'pointer'
 		},
 		divStyle: {
-			background: 'rgba(119,136,153,1)',
-			border: 'solid 5px rgba(255,240,170,1)',
+			background: '#778899',
+			border: 'solid 5px #fff0aa',
 			listStyle: 'none',
 			font: 'bold 15px "Lucida Grande"',
 			fontWeight: 'normal',
@@ -78,7 +78,7 @@
 			borderRadius: '10px',
 			backgroundColor: 'rgb(255,250,240)'
 		},
-		highlightColor: 'rgba(224,199,89,0.75)',
+		highlightColor: 'rgba(224,199,89,0.75)'
 
 	};
 
@@ -220,16 +220,7 @@
 	 */
 	function setStyle(element, style) {
 		for (var key in style) {
-			try {
 				element.style[key] = style[key];
-			} catch (e) {
-				if ('background' == key) {
-					var colors = style[key].match(/rgba\((\d+), (\d+), (\d+), ([^)]+)/);
-					var color = toHex(Math.floor(255 * colors.pop()));
-					for (var i = 1; i < colors.length; i++) color += padder(2, toHex(parseInt(colors[i])));
-					element.style.background = 'transparent';
-				}
-			}
 		}
 	}
 
@@ -339,16 +330,6 @@
 	}
 
 	/**
-	 * pad out a hexcode with 0's if needed
-	 * @param {Number} p
-	 * @param {String} n
-	 */
-	function padder(p, n) {
-		while (n.length < p) n = '0' + n;
-		return n;
-	}
-
-	/**
 	 * Clears the existing Bookmarklet content
 	 * rebuild and re-query for changes to ads on the page
 	 */
@@ -416,14 +397,6 @@
 		wrap.appendChild(head);
 		wrap.appendChild(list);
 		el.appendChild(wrap);
-	}
-
-	/**
-	 * Convert a number to hexadecimal
-	 * @param {Number} num
-	 */
-	function toHex(num) {
-		return num.toString(16);
 	}
 
 	/**
