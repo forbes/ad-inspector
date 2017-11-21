@@ -14,7 +14,7 @@ Create a bookmark in your browser. Paste the following into the "URL" field:
 ```
 javascript:(function() {
 	var script = document.createElement('script');
-	script.src = 'your-hosted-filepath/gpt-bookmark.js';
+	script.src = 'https://forbes.github.io/gpt-bookmarklet/src/gpt-loader.js';
 	script.id = 'gpt-bookmarklet';
 	document.body.appendChild(script);
 })();
