@@ -149,21 +149,21 @@
 		var swapBtn = dom(
 			'button',
 			{},
-			{ className: 'gpt-bm__button' },
+			{ className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn--black' },
 			'Swap Side',
 			toggleSide,
 		);
 		var refreshBtn = dom(
 			'button',
 			{},
-			{ className: 'gpt-bm__button' },
+			{ className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn--black' },
 			'Refresh',
 			refresh,
 		);
 		var closeBtn = dom(
 			'button',
 			{},
-			{ className: 'gpt-bm__button' },
+			{ className: 'gpt-bm__btn gpt-bm__btn--circle gpt-bm__btn--black' },
 			' X ',
 			close,
 		);
@@ -268,7 +268,9 @@
 			className: 'gpt-bm__slot',
 		});
 		var name = slot.getSlotId().getName();
-		var head = elWrapper.appendChild(dom('h2', {}, {}, name));
+		var elementId = slot.getSlotElementId();
+		var head = dom('h3', {}, { className: 'gpt-bm__h3' }, elementId);
+		head.append(dom('span', {}, {}, name));
 		var list = ulBuilder(params);
 
 		if (document.getElementById(slotHelper.getDomId(slot)) != null) {
@@ -279,10 +281,13 @@
 			});
 			el.appendChild(high);
 			var select = function() {
-				high.style.display = 'block';
-				scroll(getOffset(visEl).top);
+				[].forEach.call(el.querySelectorAll('.gpt-bm__highlight'), function(e) {
+					e.classList.remove('gpt-bm__highlight--visible');
+				});
+				high.classList.add('gpt-bm__highlight--visible');
+				scroll(getOffset(high).top);
 			};
-			listen(wrap, 'click', select);
+			wrap.onclick = select;
 		}
 
 		wrap.appendChild(head);
@@ -352,8 +357,8 @@
 
 			setButtonBar(true);
 
-			elWrapper.appendChild(dom('h1', {}, {}, 'GPT Ads'));
-			elWrapper.appendChild(dom('h2', {}, {}, 'Page Level Tags'));
+			elWrapper.appendChild(dom('h1', {}, { className: 'gpt-bm__h1' }, 'AdSpector'));
+			elWrapper.appendChild(dom('h2', {}, { className: 'gpt-bm__h2' }, 'Page Level Targeting'));
 
 			for (var j = 0; j < targetkeys.length; j++) {
 				targetArr[targetkeys[j]] = googletag.pubads().getTargeting(targetkeys[j]);
@@ -361,13 +366,15 @@
 
 			elWrapper.appendChild(ulBuilder(targetArr));
 
+			elWrapper.appendChild(dom('h2', {}, { className: 'gpt-bm__h2' }, 'Slot Level Targeting'));
+
 			for (var i = 0; i < slots.length; i++) {
 				var slot = slots[i];
 				slotBuilder(slot);
 			}
 		} else {
 			setButtonBar(false);
-			elWrapper.appendChild(dom('h1', {}, {}, 'No GPT Ads Found'));
+			elWrapper.appendChild(dom('h1', {}, { className: 'gpt-bm__h1' }, 'No GPT Ads Found'));
 		}
 	}
 
