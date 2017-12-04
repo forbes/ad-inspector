@@ -267,7 +267,7 @@
 		var wrap = dom('div', {}, {
 			className: 'gpt-bm__slot',
 		});
-		var name = slot.getSlotId().getName();
+		var name = '(' + slot.getSlotId().getName() + ')';
 		var elementId = slot.getSlotElementId();
 		var head = dom('h3', {}, { className: 'gpt-bm__h3' }, elementId);
 		head.append(dom('span', {}, {}, name));
@@ -311,15 +311,15 @@
 	 * @param {Object} obj
 	 */
 	function ulBuilder(obj) {
-		var ul_dom = dom('ul');
+		var ulDom = dom('ul');
 		for (var key in obj) {
-			var li_dom = dom('li', {}, {}, key + ': ');
+			var liDom = dom('li', {}, {}, key + ': ');
 
 			for (var i = 0, len = (obj[key] || []).length; i < len; i++) {
 				if ('object' == typeof obj[key][i]) {
-					li_dom.appendChild(obj[key][i]);
+					liDom.appendChild(obj[key][i]);
 					if (i != len - 1) {
-						li_dom.appendChild(document.createTextNode(','));
+						liDom.appendChild(document.createTextNode(', '));
 					}
 				} else {
 
@@ -329,17 +329,17 @@
 							obj[key][i] += '';
 						} else {
 							if (obj[key][i] != '') {
-								obj[key][i] += ',';
+								obj[key][i] += ', ';
 							}
 						}
 					}
-					li_dom.appendChild(document.createTextNode(obj[key][i]));
+					liDom.appendChild(document.createTextNode(obj[key][i]));
 
 				}
 			}
-			ul_dom.appendChild(li_dom);
+			ulDom.appendChild(liDom);
 		}
-		return ul_dom;
+		return ulDom;
 	}
 
 	/**
