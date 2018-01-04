@@ -183,7 +183,7 @@
 	 * Remove Bookmarklet from Dom
 	 */
 	function close() {
-		el.removeChild(elWrapper);
+		document.body.removeChild(el);
 	}
 
 	/**
