@@ -13,7 +13,11 @@
     "Google Tag",
     "Google Publisher Tag"
   ],
-  "author": "Anthony Giallella",
+  "contributors": [
+    "Anthony Giallella <ajg723@gmail.com>",
+    "Johnny McCampbell <jmccampbell@forbes.com>",
+    "Alexander Shnayderman <ashnayderman@forbes.com>"
+  ],
   "license": "MIT",
   "devDependencies": {
     "http-server": "^0.10.0"
