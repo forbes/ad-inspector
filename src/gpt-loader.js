@@ -43,7 +43,7 @@
 					target: '_new',
 				}, resp.creativeId)];
 			} else if (resp && resp.sourceAgnosticCreativeId) {
-				params['Creative ID (SA)'] = [dom('a', {}, {
+				params['Creative ID'] = [dom('a', {}, {
 					href: slotHelper.getLink(account, 'creative', resp.sourceAgnosticCreativeId),
 					target: '_new',
 				}, resp.sourceAgnosticCreativeId)];
@@ -55,7 +55,7 @@
 					target: '_new',
 				}, resp.lineItemId)];
 			} else if (resp && resp.sourceAgnosticLineItemId) {
-				params['Line Item ID (SA)'] = [dom('a', {}, {
+				params['Line Item ID'] = [dom('a', {}, {
 					href: slotHelper.getLink(account, 'lineItem', resp.sourceAgnosticLineItemId),
 					target: '_new',
 				}, resp.sourceAgnosticLineItemId)];
@@ -67,8 +67,7 @@
 		 * @return {String}
 		 */
 		getLink: function(account, type, id) {
-			var idKey = type === 'creative' ? 'creativeId' : 'lineItemId';
-			return 'https://www.google.com/dfp/' + account + '#delivery/CreativeDetail/' + idKey + '=' + id;
+			return 'https://www.google.com/dfp/' + account + '#delivery/' + type + 'Detail/' + type + 'Id=' + id;
 		},
 		/**
 		 * Returns the account name of a slot
@@ -357,7 +356,7 @@
 
 			setButtonBar(true);
 
-			elWrapper.appendChild(dom('h1', {}, { className: 'gpt-bm__h1' }, 'AdSpector'));
+			elWrapper.appendChild(dom('h1', {}, { className: 'gpt-bm__h1' }, 'Ad Inspector'));
 			elWrapper.appendChild(dom('h2', {}, { className: 'gpt-bm__h2' }, 'Page Level Targeting'));
 
 			for (var j = 0; j < targetkeys.length; j++) {
