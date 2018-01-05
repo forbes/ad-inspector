@@ -1,0 +1,143 @@
+.gpt-bm {}
+.gpt-bm__wrapper {
+	background: #fff;
+	border-radius: 10px;
+	border: 5px solid #666;
+	bottom: 10px;
+	overflow: auto;
+	padding: 10px 0;
+	position: fixed;
+	right: 10px;
+	top: 10px;
+	width: 410px;
+	z-index: 10000000000;
+}
+.gpt-bm__wrapper--left {
+	left: 10px;
+	right: auto;
+}
+/* Fonts */
+.gpt-bm__h1,
+.gpt-bm__h2,
+.gpt-bm__h3,
+.gpt-bm li,
+.gpt-bm__btn {
+	font-family: Avenir, "Noto Sans", "Droid Sans", "Helvetica Neue", Helvetica, Arial;
+	font-weight: normal;
+}
+/* Buttons */ 
+.gpt-bm__buttons {
+	align-items: center;
+	display: flex;
+	justify-content: flex-end;
+	padding: 0 10px;
+	position: absolute;
+	right: 20px;
+	top: 25px;
+}
+.gpt-bm__btn {
+	align-items: center;
+	border-radius: 5px;
+	border: none;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: inline-flex;
+	font-size: 0.875rem;
+	font-weight: bold;
+	justify-content: center;
+	line-height: 1;
+	margin-left: 10px;
+	transition: all 200ms ease;
+}
+.gpt-bm__btn.gpt-bm__btn--rect-lg {
+	padding: 1.5em 1em;
+}
+.gpt-bm__btn.gpt-bm__btn--rect-sm {
+	padding: 0.75em 1em;
+}
+.gpt-bm__btn.gpt-bm__btn--square {
+	width: 45px;
+	height: 45px;
+	padding: 1.1em 1em;
+}
+.gpt-bm__btn.gpt-bm__btn--circle {
+  width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+}
+.gpt-bm__btn.gpt-bm__btn--black {
+  background-color: #fff;
+  border: 2px solid #000;
+	color: #000;
+}
+.gpt-bm__btn:hover {
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+/* Slots */
+.gpt-bm__slot {
+	cursor: pointer;
+	padding: 10px;
+}
+.gpt-bm__slot:hover {
+	background: white;
+	border-radius: 10px;
+}
+.gpt-bm__slot a {
+	color: #003891;
+}
+/* Headers */
+.gpt-bm__h1 {
+	font-size: 40px;
+	line-height: 64px;
+	margin-top: 50px;
+	padding-left: 10px;
+}
+.gpt-bm__h2 {
+	font-size: 32px;
+	line-height: 51.2px;
+	margin-top: 10px;
+	padding-left: 10px;
+}
+.gpt-bm__h3 {
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	background: #666;
+	color: #fff;
+	font-size: 24px;
+	line-height: 38.4px;
+	padding: 0 10px;
+}
+.gpt-bm__h3 span {
+	font-size: 12px;
+	margin-left: 10px;
+}
+/* Highlights */
+.gpt-bm__highlight {
+	background: rgba(200, 200, 200, 0.5);
+	display: none;
+	border-radius: 10px;
+	position: absolute;
+	z-index: 2;
+}
+.gpt-bm__highlight--visible {
+	display: block;
+}
+
+/* Page level */
+.gpt-bm ul {
+	border: 1px solid #666;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	margin: 0 10px;
+	padding: 5px;
+}
+.gpt-bm .gpt-bm__slot ul {
+	margin: 0;
+}
+.gpt-bm li {
+	font-size: 16px;
+	line-height: 25.6px;
+	word-wrap: break-word;
+}
+  
+

@@ -10,77 +10,10 @@
 (function() {
 
 	/**
-	Top Level Variables
+	 * Top Level Variables
 	 */
 	var el;
-	var wrap_el;
-	var styleConfig = {
-		linkStyle: {
-			cursor: 'pointer',
-			color: 'blue'
-		},
-		headingStyle: {
-			fontFamily: 'Georgia',
-			fontWeight: 'bold',
-			color: 'rgb(224, 199, 89)',
-			marginTop: '5px'
-		},
-		firstButtonStyle:{
-			marginLeft: '0%',
-			marginRight: '20px',
-			background: 'white',
-			border: '#e0c759',
-			color: 'black',
-			padding: '5px',
-			font: '11px "Lucida Grande"',
-			display: 'inline-block',
-			cursor: 'pointer'
-		},
-		secondButtonStyle:{
-			background: 'white',
-			border: '#e0c759',
-			color: 'black',
-			padding: '5px',
-			marginRight: '56%',
-			font: '11px "Lucida Grande"',
-			display: 'inline-block',
-			cursor: 'pointer'
-		},
-		thirdButtonStyle:{
-			background: 'white',
-			border: '#e0c759',
-			color: 'black',
-			padding: '5px',
-			display: 'inline-block',
-			font: '11px "Lucida Grande"',
-			cursor: 'pointer'
-		},
-		divStyle: {
-			background: '#778899',
-			border: 'solid 5px #fff0aa',
-			listStyle: 'none',
-			font: 'bold 15px "Lucida Grande"',
-			fontWeight: 'normal',
-			color: '#000',
-			borderRadius: '10px',
-			position: 'fixed',
-			padding: '10px',
-			margin: '0',
-			top: '10px',
-			bottom: '10px',
-			right: '10px',
-			width: '410px',
-			overflow: 'auto',
-			zIndex: 10000000000
-		},
-		wrapStyle: {
-			padding: '5px',
-			borderRadius: '10px',
-			backgroundColor: 'rgb(255,250,240)'
-		},
-		highlightColor: 'rgba(224,199,89,0.75)'
-
-	};
+	var elWrapper;
 
 	/**
 	 * Slot helper is a collection of necessary queries for GPT data
@@ -103,41 +36,46 @@
 			var resp = slot.getResponseInformation();
 			var account = this.getAccountName(slot);
 			var params = {};
-			var linkstyles = styleConfig.linkStyle;
 
 			if (resp && resp.creativeId) {
-				params['Creative ID'] = [dom('a', linkstyles, {
+				params['Creative ID'] = [dom('a', {}, {
+					href: slotHelper.getLink(account, 'creative', resp.creativeId),
 					target: '_new',
-					href: 'https://www.google.com/dfp/' + account + '#delivery/CreativeDetail/creativeId=' + resp.creativeId
 				}, resp.creativeId)];
 			} else if (resp && resp.sourceAgnosticCreativeId) {
-				params['Creative ID (SA)'] = [dom('a', linkstyles, {
+				params['Creative ID'] = [dom('a', {}, {
+					href: slotHelper.getLink(account, 'creative', resp.sourceAgnosticCreativeId),
 					target: '_new',
-					href: 'https://www.google.com/dfp/' + account + '#delivery/CreativeDetail/creativeId=' + resp.sourceAgnosticCreativeId
 				}, resp.sourceAgnosticCreativeId)];
 			}
 
 			if (resp && resp.lineItemId) {
-				params['Line Item ID'] = [dom('a', linkstyles, {
+				params['Line Item ID'] = [dom('a', {}, {
+					href: slotHelper.getLink(account, 'lineItem', resp.lineItemId),
 					target: '_new',
-					href: 'https://www.google.com/dfp/' + account + '#delivery/CreativeDetail/lineItemId=' + resp.lineItemId
 				}, resp.lineItemId)];
 			} else if (resp && resp.sourceAgnosticLineItemId) {
-				params['Line Item ID (SA)'] = [dom('a', linkstyles, {
+				params['Line Item ID'] = [dom('a', {}, {
+					href: slotHelper.getLink(account, 'lineItem', resp.sourceAgnosticLineItemId),
 					target: '_new',
-					href: 'https://www.google.com/dfp/' + account + '#delivery/CreativeDetail/lineItemId=' + resp.sourceAgnosticLineItemId
 				}, resp.sourceAgnosticLineItemId)];
 			}
 			return params;
+		},
+		/**
+		 * Returns link to creative and line item
+		 * @return {String}
+		 */
+		getLink: function(account, type, id) {
+			return 'https://www.google.com/dfp/' + account + '#delivery/' + type + 'Detail/' + type + 'Id=' + id;
 		},
 		/**
 		 * Returns the account name of a slot
 		 * @return {String}
 		 */
 		getAccountName: function(slot) {
-			var name = slot.getName(),
-				pattern = /^\/(\d+)\//;
-
+			var name = slot.getName();
+			var pattern = /^\/(\d+)\//;
 			return pattern.exec(name)[1];
 		},
 		/**
@@ -160,7 +98,7 @@
 
 	/**
 	 * Returns the offset of an HTML element including potential parent element offset
-	 *  @param  {HTMLElement} element
+	 * @param {HTMLElement} element
 	 */
 	function getOffset(element) {
 		if (element.offsetParent) {
@@ -178,7 +116,7 @@
 
 	/**
 	 * Returns a style object to be used for highlighting an element
-	 *  @param  {HTMLElement} element
+	 * @param {HTMLElement} element
 	 */
 	function getHighlightStyle(element) {
 		var style = getOffset(element);
@@ -188,29 +126,7 @@
 		}
 		style.width = Math.min(document.width || document.body.offsetWidth, element.offsetWidth + padding * 2) + 'px';
 		style.height = Math.min(document.height || document.body.offsetHeight, element.offsetHeight + padding * 2) + 'px';
-		style.position = 'absolute';
-		style.background = styleConfig.highlightColor;
-		style.display = 'none';
-		style.borderRadius = padding + 'px';
-
 		return style;
-	}
-
-	/**
-	 * Creates a Heading of a specified font-size
-	 * @return {HTMLElement}
-	 */
-	function setHeading(size, content) {
-		var style = {
-			fontSize: (size * 9) + 'px',
-			fontFamily: styleConfig.headingStyle.fontFamily,
-			fontWeight: styleConfig.headingStyle.fontWeight,
-			color: styleConfig.headingStyle.color,
-			marginTop: styleConfig.headingStyle.marginTop
-		};
-
-		var heading = dom('div', style, {}, content);
-		return heading;
 	}
 
 	/**
@@ -220,7 +136,7 @@
 	 */
 	function setStyle(element, style) {
 		for (var key in style) {
-				element.style[key] = style[key];
+			element.style[key] = style[key];
 		}
 	}
 
@@ -228,64 +144,46 @@
 	 * Manages the creation of the top button bar
 	 * and adds the buttons to the bar
 	 */
-	function setButtonBar() {
-		var topbar = dom('div', {
-			width: '100%'
+	function setButtonBar(gptLoaded) {
+		var swapBtn = dom(
+			'button',
+			{},
+			{ className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn--black' },
+			'Swap Side',
+			toggleSide,
+		);
+		var refreshBtn = dom(
+			'button',
+			{},
+			{ className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn--black' },
+			'Refresh',
+			refresh,
+		);
+		var closeBtn = dom(
+			'button',
+			{},
+			{ className: 'gpt-bm__btn gpt-bm__btn--circle gpt-bm__btn--black' },
+			' X ',
+			close,
+		);
+		var topbar = dom('div', {}, {
+			className: 'gpt-bm__buttons',
 		});
-		el.appendChild(topbar);
-
-		buttonBuilder(topbar, 'Swap Side', toggleSide, {id: 'gptToggle'}, styleConfig.firstButtonStyle);
-		buttonBuilder(topbar, 'Refresh', reset, {}, styleConfig.secondButtonStyle);
-		buttonBuilder(topbar, ' X ', clearSlots, {}, styleConfig.thirdButtonStyle);
-	}
-
-	/**
-	 * Manages the creation of the top button bar
-	 * add exit button
-	 */
-	function setExit() {
-		var topbar = dom('div', {
-			width: '100%'
-		});
-		el.appendChild(topbar);
-
-		buttonBuilder(topbar, ' X ', clearSlots, {}, styleConfig.firstButtonStyle);
-	}
-
-	/**
-	 * Creates an HTML button and appends it to parent element
-	 * if all necessary params are provided
-	 * @param {HTMLElement} context
-	 * @param {String} value
-	 * @param {Function} func
-	 * @param {Object} [props]
-	 * @param {Object} [style]
-	 */
-	function buttonBuilder(context, value, func, props, style) {
-		var button = document.createElement('input');
-		button.type = 'button';
-		if (value && func && context) {
-			button.value = value;
-			button.onclick = func;
-			if (style) {
-				setStyle(button, style);
-			}
-			if (props) {
-				for (var key in props) {
-					button[key] = props[key];
-				}
-			}
-			context.appendChild(button);
+		if (gptLoaded) {
+			topbar.append(swapBtn, refreshBtn, closeBtn);
 		} else {
-			return;
+			topbar.append(closeBtn);
 		}
+		
+		elWrapper.appendChild(topbar);
+
 	}
 
 	/**
 	 * Remove Bookmarklet from Dom
 	 */
-	function clearSlots() {
-		wrap_el.parentNode.removeChild(wrap_el);
+	function close() {
+		document.body.removeChild(el);
 	}
 
 	/**
@@ -295,7 +193,7 @@
 	 * @param {Object} [props]
 	 * @param {String} [content]
 	 */
-	function dom(tag, style, props, content) {
+	function dom(tag, style, props, content, func) {
 		var element = document.createElement(tag);
 
 		if (style) {
@@ -310,6 +208,10 @@
 
 		if (content) {
 			element.appendChild(document.createTextNode(content));
+		}
+
+		if (func) {
+			element.onclick = func;
 		}
 
 		return element;
@@ -333,13 +235,12 @@
 	 * Clears the existing Bookmarklet content
 	 * rebuild and re-query for changes to ads on the page
 	 */
-	function reset() {
-		var myNode = document.getElementById('wrapper');
-		while (myNode.firstChild) {
-			myNode.removeChild(myNode.firstChild);
+	function refresh() {
+		while (elWrapper.hasChildNodes()) {
+		  elWrapper.removeChild(elWrapper.lastChild);
 		}
-		[].forEach.call(document.querySelectorAll('div[id^="highlight"]'), function(e) {
-			e.parentNode.removeChild(e);
+		[].forEach.call(el.querySelectorAll('.gpt-bm__highlight'), function(e) {
+			el.removeChild(e);
 		});
 		contentInit();
 	}
@@ -362,53 +263,45 @@
 		var params = slot.getTargetingMap();
 		params.Sizes = slotHelper.getSlotSizes(slot);
 		params = Object.assign(params, slotHelper.getClientAdIds(slot));
-		var wrap = dom('div', {
-			padding: styleConfig.wrapStyle.padding,
-			borderRadius: styleConfig.wrapStyle.borderRadius,
-			cursor: 'pointer'
+		var wrap = dom('div', {}, {
+			className: 'gpt-bm__slot',
 		});
-		var name = slot.getSlotId().getName();
-		var head = setHeading(2, name);
+		var name = '(' + slot.getSlotId().getName() + ')';
+		var elementId = slot.getSlotElementId();
+		var head = dom('h3', {}, { className: 'gpt-bm__h3' }, elementId);
+		head.append(dom('span', {}, {}, name));
 		var list = ulBuilder(params);
 
 		if (document.getElementById(slotHelper.getDomId(slot)) != null) {
 			var slotEl = document.getElementById(slotHelper.getDomId(slot));
 			var visEl = slotEl.querySelector('iframe') || slotEl;
 			var high = dom('div', getHighlightStyle(visEl), {
-				id: 'highlight' + name
+				className: 'gpt-bm__highlight',
 			});
-			wrap_el.appendChild(high);
+			el.appendChild(high);
 			var select = function() {
-				high.style.display = 'block';
-				scroll(getOffset(visEl).top);
+				[].forEach.call(el.querySelectorAll('.gpt-bm__highlight'), function(e) {
+					e.classList.remove('gpt-bm__highlight--visible');
+				});
+				high.classList.add('gpt-bm__highlight--visible');
+				scroll(getOffset(high).top);
 			};
-			var highlight = function() {
-				wrap.style.backgroundColor = styleConfig.wrapStyle.backgroundColor;
-			};
-			var unselect = function() {
-				wrap.style.backgroundColor = 'transparent';
-				high.style.display = 'none';
-			};
-			listen(wrap, 'click', select);
-			listen(wrap, 'mouseover', highlight);
-			listen(wrap, 'mouseout', unselect);
+			wrap.onclick = select;
 		}
 
 		wrap.appendChild(head);
 		wrap.appendChild(list);
-		el.appendChild(wrap);
+		elWrapper.appendChild(wrap);
 	}
 
 	/**
 	 * Move Bookmarklet to left or right side of screen, replace button text
 	 */
-	function toggleSide(){
-		if(el.style.right){
-			el.style.right = '';
-			el.style.left = '10px';
-		} else{
-			el.style.left = '';
-			el.style.right = '10px';
+	function toggleSide() {
+		if (elWrapper.classList.contains('gpt-bm__wrapper--left')) {
+			elWrapper.classList.remove('gpt-bm__wrapper--left');
+		} else {
+			elWrapper.classList.add('gpt-bm__wrapper--left');
 		}
 	}
 
@@ -417,15 +310,15 @@
 	 * @param {Object} obj
 	 */
 	function ulBuilder(obj) {
-		var ul_dom = dom('ul');
+		var ulDom = dom('ul');
 		for (var key in obj) {
-			var li_dom = dom('li', {}, {}, key + ': ');
+			var liDom = dom('li', {}, {}, key + ': ');
 
 			for (var i = 0, len = (obj[key] || []).length; i < len; i++) {
 				if ('object' == typeof obj[key][i]) {
-					li_dom.appendChild(obj[key][i]);
+					liDom.appendChild(obj[key][i]);
 					if (i != len - 1) {
-						li_dom.appendChild(document.createTextNode(','));
+						liDom.appendChild(document.createTextNode(', '));
 					}
 				} else {
 
@@ -435,17 +328,17 @@
 							obj[key][i] += '';
 						} else {
 							if (obj[key][i] != '') {
-								obj[key][i] += ',';
+								obj[key][i] += ', ';
 							}
 						}
 					}
-					li_dom.appendChild(document.createTextNode(obj[key][i]));
+					liDom.appendChild(document.createTextNode(obj[key][i]));
 
 				}
 			}
-			ul_dom.appendChild(li_dom);
+			ulDom.appendChild(liDom);
 		}
-		return ul_dom;
+		return ulDom;
 	}
 
 	/**
@@ -454,7 +347,6 @@
 	 * Starting point for all GPT queries
 	 */
 	function contentInit() {
-
 		if (window.googletag && googletag.pubads) {
 
 			var pa = googletag.pubads();
@@ -462,53 +354,45 @@
 			var targetkeys = googletag.pubads().getTargetingKeys();
 			var targetArr = [];
 
-			setButtonBar();
+			setButtonBar(true);
 
-			el.appendChild(setHeading(3, 'GPT Ads'));
-			el.appendChild(setHeading(2, 'Page Level Tags'));
+			elWrapper.appendChild(dom('h1', {}, { className: 'gpt-bm__h1' }, 'Ad Inspector'));
+			elWrapper.appendChild(dom('h2', {}, { className: 'gpt-bm__h2' }, 'Page Level Targeting'));
+
 			for (var j = 0; j < targetkeys.length; j++) {
 				targetArr[targetkeys[j]] = googletag.pubads().getTargeting(targetkeys[j]);
 			}
 
-			el.appendChild(ulBuilder(targetArr));
+			elWrapper.appendChild(ulBuilder(targetArr));
+
+			elWrapper.appendChild(dom('h2', {}, { className: 'gpt-bm__h2' }, 'Slot Level Targeting'));
 
 			for (var i = 0; i < slots.length; i++) {
 				var slot = slots[i];
 				slotBuilder(slot);
 			}
 		} else {
-			setExit();
-			el.appendChild(setHeading(3, 'No GPT Tags Found'));
+			setButtonBar(false);
+			elWrapper.appendChild(dom('h1', {}, { className: 'gpt-bm__h1' }, 'No GPT Ads Found'));
 		}
-
-		wrap_el.appendChild(el);
 	}
 
 	/**
-	 * Manages setting up the outer shell of the Bookmarklet
-	 * Content is appended as children into it
+	 * Set up DOM wrappers
+	 * Two nodes are required to allow highlights to be positioned outside fixed element
 	 */
 	function structureInit() {
-
-		wrap_el = dom('div', {}, {
-			id: 'GPT-Bookmarklet'
+		el = dom('div', {}, {
+			className: 'gpt-bm',
 		});
-		el = dom('div', styleConfig.divStyle, {
-			id: 'wrapper'
+		elWrapper = dom('div', {}, {
+			className: 'gpt-bm__wrapper',
 		});
-
-		document.body.appendChild(wrap_el);
+		el.append(elWrapper);
+		document.body.appendChild(el);
 	}
 
-	/**
-	 * Set up outer structure then inner content of Bookmarklet
-	 */
-	function init() {
-		structureInit();
-		contentInit();
-	}
-	init();
+	structureInit();
+	contentInit();
 
 })();
-
-
