@@ -1,11 +1,11 @@
 /**
- * GPT Bookmarklet -- This bookmarklet loads a helpful display of ad related data
+ * Ad Inspector -- This bookmarklet loads a helpful display of ad related data for GPT served ads.
  *
  * The code to be inserted in a bookmark lives here:
- * https://forbes.github.io/gpt-bookmarklet/src/gpt-bookmark.js
+ * https://forbes.github.io/ad-inspector/src/bookmark-url.js
  *
  * See the github page for more information:
- * https://github.com/forbes/gpt-bookmarklet
+ * https://github.com/forbes/ad-inspector
  */
 (function() {
 
