@@ -122,7 +122,6 @@
 .gpt-bm__highlight--visible {
 	display: block;
 }
-
 /* Page level */
 .gpt-bm ul {
 	border: 1px solid #666;
@@ -139,5 +138,3 @@
 	line-height: 25.6px;
 	word-wrap: break-word;
 }
-  
-
