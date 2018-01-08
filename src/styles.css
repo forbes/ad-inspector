@@ -16,6 +16,11 @@
 	left: 10px;
 	right: auto;
 }
+.gpt-bm__forbes-logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
 /* Fonts */
 .gpt-bm__h1,
 .gpt-bm__h2,
@@ -32,8 +37,8 @@
 	justify-content: flex-end;
 	padding: 0 10px;
 	position: absolute;
-	right: 20px;
-	top: 25px;
+	right: 0;
+	top: 5px;
 }
 .gpt-bm__btn {
 	align-items: center;
@@ -89,8 +94,8 @@
 .gpt-bm__h1 {
 	font-size: 40px;
 	line-height: 64px;
-	margin-top: 50px;
-	padding-left: 10px;
+	border-bottom: 1px solid black;
+	margin: 30px 10px 0;
 }
 .gpt-bm__h2 {
 	font-size: 32px;
@@ -137,4 +142,7 @@
 	font-size: 16px;
 	line-height: 25.6px;
 	word-wrap: break-word;
+}
+.gpt-bm li b {
+	font-weight: bold;
 }

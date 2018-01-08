@@ -312,7 +312,9 @@
 	function ulBuilder(obj) {
 		var ulDom = dom('ul');
 		for (var key in obj) {
-			var liDom = dom('li', {}, {}, key + ': ');
+			var keyDom = dom('b', {}, {}, key + ': ');
+			var liDom = dom('li', {}, {});
+			liDom.appendChild(keyDom);
 
 			for (var i = 0, len = (obj[key] || []).length; i < len; i++) {
 				if ('object' == typeof obj[key][i]) {
@@ -356,6 +358,10 @@
 
 			setButtonBar(true);
 
+			elWrapper.appendChild(dom('img', {}, {
+				className: 'gpt-bm__forbes-logo',
+				src: 'https://i.forbesimg.com/assets/images/forbes-ad-inspector.png',
+			}));
 			elWrapper.appendChild(dom('h1', {}, { className: 'gpt-bm__h1' }, 'Ad Inspector'));
 			elWrapper.appendChild(dom('h2', {}, { className: 'gpt-bm__h2' }, 'Page Level Targeting'));
 
