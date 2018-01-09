@@ -7,6 +7,20 @@
  * See the github page for more information:
  * https://github.com/forbes/ad-inspector
  */
+
+(function() {
+	var id = 'ad-inspector-styles';
+	var link = document.getElementById(id);
+	if (!link) {
+		link = document.createElement('link');
+		link.id = id;
+		link.rel='stylesheet';
+		link.type='text/css';
+		link.href = 'https://forbes.github.io/ad-inspector/src/styles.css';
+		document.head.appendChild(link);	
+	}
+})();
+
 (function() {
 
 	/**
