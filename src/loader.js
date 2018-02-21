@@ -17,7 +17,7 @@
 		link.rel='stylesheet';
 		link.type='text/css';
 		link.href = 'https://forbes.github.io/ad-inspector/src/styles.css';
-		document.head.appendChild(link);	
+		document.head.appendChild(link);
 	}
 })();
 
@@ -188,7 +188,7 @@
 		} else {
 			topbar.append(closeBtn);
 		}
-		
+
 		elWrapper.appendChild(topbar);
 
 	}
