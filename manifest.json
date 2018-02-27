@@ -13,15 +13,10 @@
 	],
 	"content_scripts": [
 		{
-			"matches": [
-				"<all_urls>"
-			],
+			"matches": [ "<all_urls>" ],
 			"js": ["src/bookmark-url.js"],
 			"css": ["src/styles.css"]
 		}
 	],
-	"background": {
-    "scripts": ["src/background.js"],
-    "persistent": false
-  }
+	"content_security_policy": "script-src 'self' https://forbes.github.io/ad-inspector/src/loader.js; object-src 'self'"
 }
