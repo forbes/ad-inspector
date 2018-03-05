@@ -363,7 +363,6 @@
 	 * Starting point for all GPT queries
 	 */
 	function contentInit() {
-		console.log('window in loader', window)
 		if (window.googletag && googletag.pubads) {
 
 			var pa = googletag.pubads();

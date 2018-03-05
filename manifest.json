@@ -4,19 +4,19 @@
 	"description": "This extension monitors GPT ad units and their associated targeting on web pages.",
 	"version": "1.0",
 	"browser_action": {
-		"default_icon": "src/icon.png",
-		"default_popup": "src/popup.html"
+		"default_icon": "src/icon.png"
 	},
 	"permissions": [
 		"activeTab",
-		"storage"
+		"storage",
+		"tabs",
+		"<all_urls>",
+		"http://*/*",
+		"https://*/*",
+		"*://*/*"
 	],
-	"content_scripts": [
-		{
-			"matches": [ "<all_urls>" ],
-			"js": ["src/bookmark-url.js"],
-			"css": ["src/styles.css"]
-		}
-	],
-	"content_security_policy": "script-src 'self' https://forbes.github.io/ad-inspector/src/loader.js; object-src 'self'"
+	"background": {
+		"scripts": ["src/background.js"],
+		"persistent": true
+	}
 }
