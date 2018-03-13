@@ -197,6 +197,8 @@
 	 * Remove Bookmarklet from Dom
 	 */
 	function close() {
+		var script = document.getElementById('ad-inspector');
+		document.body.removeChild(script);
 		document.body.removeChild(el);
 	}
 
