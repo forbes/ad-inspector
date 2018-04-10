@@ -1,6 +1,6 @@
 {
   "name": "ad-inspector",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Provides functionality for bookmarkable script to highlight GPT based ads on a page",
   "main": "bookmark-url.js",
   "scripts": {
