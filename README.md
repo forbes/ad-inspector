@@ -2,29 +2,39 @@
 
 A bookmarklet for monitoring GPT ad units and their associated targeting on web pages.
 
+* [Dev Requirements](#dev-requirements)
 * [Installation](#installation)
+* [Development](#development)
+* [Charles Setup](#charles-setup)
 * [Additional Information](#additional-information)
 * [Contributors](#contributors)
 
+## Dev Requirements
+- [Node](https://nodejs.org/en/)
+- A proxy server like [Charles](https://www.charlesproxy.com/)
+
 ## Installation
+`npm install`
 
-Create a bookmark in your browser. Paste the following into the "URL" field:
+## Development
+This project runs a simple http server that watches for changes to your JS/CSS files.
 
-```
-javascript:(function() {
-  var script = document.createElement('script');
-  script.src = 'https://forbes.github.io/ad-inspector/src/loader.js';
-  script.id = 'ad-inspector';
-  document.body.appendChild(script);
-})();
-```
+To start the server:
+`npm run start`
+
+Assuming you have no errors, you should be able to see your files on your local host (http://127.0.0.1:8080/).
+
+See proxied changes at https://forbes.github.io/ad-inspector/src/loader.js.
+
+## Charles Setup
+See Charles setup instructions [here](https://github.com/forbes/ad-inspector/wiki/Charles-Setup)
 
 ## Additional Information
-
 This tool should work on all pages that utilize GPT Tags. It does not require any supplemental data to be provided in the page.
 
 ## Contributors
-
-**Anthony Giallella** - ajg723@gmail.com
-**Johnny McCampbell** - jmccampbell@forbes.com
-**Alexander Shnayderman** - ashnayderman@forbes.com
+* **Anthony Giallella** - ajg723@gmail.com
+* **Johnny McCampbell** - jmccampbell@forbes.com
+* **Ben Harrigan** - bharrigan@forbes.com
+* **Alexander Shnayderman** - ashnayderman@forbes.com
+* **Anne Zhou** - azhou@forbes.com
