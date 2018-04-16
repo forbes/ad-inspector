@@ -43,10 +43,10 @@ const getHighlightStyle = (element) => {
     const style = getOffset(element);
     const padding = 10;
     for (let k in style) {
-        style[k] = Math.max(0, style[k] - padding) + 'px';
+        style[k] = `${Math.max(0, style[k] - padding)}px`;
     }
-    style.width = Math.min(document.width || document.body.offsetWidth, element.offsetWidth + padding * 2) + 'px';
-    style.height = Math.min(document.height || document.body.offsetHeight, element.offsetHeight + padding * 2) + 'px';
+    style.width = `${Math.min(document.width || document.body.offsetWidth, element.offsetWidth + padding * 2)}px`;
+    style.height = `${Math.min(document.height || document.body.offsetHeight, element.offsetHeight + padding * 2)}px`;
     return style;
 };
 
@@ -178,7 +178,7 @@ const toggleSide = () => {
 const ulBuilder = (obj) => {
     const ulDom = utils.dom('ul');
     for (let key in obj) {
-        const keyDom = utils.dom('b', {}, {}, key + ': ');
+        const keyDom = utils.dom('b', {}, {}, `${key}: `);
         const liDom = utils.dom('li', {}, {});
         liDom.appendChild(keyDom);
 

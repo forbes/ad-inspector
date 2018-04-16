@@ -48,7 +48,7 @@ const getClientAdIds = (slot) => {
  * @return {String}
  */
 const getLink = (account, type, id) => {
-    return 'https://www.google.com/dfp/' + account + '#delivery/' + type + 'Detail/' + type + 'Id=' + id;
+    return `https://www.google.com/dfp/${account}#delivery/${type}Detail/${type}Id=${id}`;
 };
 
 /**
@@ -72,7 +72,7 @@ const getSlotSizes = (slot) => {
         if (typeof sizes[i] == 'string') {
             size_array.push(sizes[i]);
         } else {
-            size_array.push(sizes[i].getWidth() + 'x' + sizes[i].getHeight());
+            size_array.push(`${sizes[i].getWidth()}x${sizes[i].getHeight()}`);
         }
     }
     return size_array;
