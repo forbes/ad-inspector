@@ -23,7 +23,7 @@ Start by building the project:
 `npm run build`
 
 To watch changes made to files:
-`npm run
+`npm run watch`
 
 To start the server:
 `npm run start`
@@ -47,4 +47,4 @@ This tool should work on all pages that utilize GPT Tags. It does not require an
 * **Ben Harrigan** - bharrigan@forbes.com
 * **Alexander Shnayderman** - ashnayderman@forbes.com
 * **Anne Zhou** - azhou@forbes.com
-* **Aaron ROmel** - aromel@forbes.com
+* **Aaron Romel** - aromel@forbes.com
