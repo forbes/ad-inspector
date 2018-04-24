@@ -19,12 +19,21 @@ A bookmarklet for monitoring GPT ad units and their associated targeting on web 
 ## Development
 This project runs a simple http server that watches for changes to your JS/CSS files.
 
+Start by building the project:
+`npm run build`
+
+To watch changes made to files:
+`npm run watch`
+
 To start the server:
 `npm run start`
 
 Assuming you have no errors, you should be able to see your files on your local host (http://127.0.0.1:8080/).
 
-See proxied changes at https://forbes.github.io/ad-inspector/src/loader.js.
+To add chrome extension for local development:
+- Navigate to `chrome://extensions/` in chrome browser
+- Select 'Load Unpacked'
+- Select `src` folder of Ad Inspector project, extension will be added to chrome
 
 ## Charles Setup
 See Charles setup instructions [here](https://github.com/forbes/ad-inspector/wiki/Charles-Setup)
@@ -38,3 +47,4 @@ This tool should work on all pages that utilize GPT Tags. It does not require an
 * **Ben Harrigan** - bharrigan@forbes.com
 * **Alexander Shnayderman** - ashnayderman@forbes.com
 * **Anne Zhou** - azhou@forbes.com
+* **Aaron Romel** - aromel@forbes.com
