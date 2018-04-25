@@ -72,7 +72,7 @@ const getCreativeId = (currentAd) => {
         creativeId, 
         ...(currentAd.getWrapperCreativeIds() || [])
     ].filter(utils.nonEmptyString);
-}
+};
 
 /**
  * Displays error message when failures occur
