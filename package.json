@@ -1,12 +1,12 @@
 {
   "name": "ad-inspector",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Provides functionality for bookmarkable script and chrome extension to highlight GPT based ads on a page",
   "main": "bookmark-url.js",
   "scripts": {
     "build": "npm run lint && webpack",
     "lint": "eslint ./src",
-    "start": "http-server ./dist/",
+    "start": "http-server ./src/",
     "watch": "webpack -w"
   },
   "keywords": [

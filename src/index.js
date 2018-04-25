@@ -1,6 +1,6 @@
 import './styles.css';
 
-const loader = require('./loader');
+const app = require('./app');
 
-loader.structureInit();
-loader.contentInit();
+app.structureInit();
+app.contentInit();
