@@ -78,6 +78,14 @@
 .gpt-bm__btn:hover {
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
+/* Video */
+.gpt-bm__video {
+	width: 100%;
+}
+.gpt-bm__p--desc {
+	display: inline;
+	padding-left: 5px;
+}
 /* Slots */
 .gpt-bm__slot {
 	cursor: pointer;
