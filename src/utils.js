@@ -40,7 +40,10 @@ const setStyle = (element, style) => {
     }
 };
 
+const nonEmptyString = (str) => str !== '';
+
 module.exports = {
     dom,
+    nonEmptyString,
     setStyle
 };

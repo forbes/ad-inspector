@@ -28,6 +28,7 @@ module.exports = {
     },
     "globals": {
         "chrome": false,
-        "googletag": false
-    },
+        "googletag": false,
+        "videojs": false
+    }
 };

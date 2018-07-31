@@ -10,6 +10,7 @@
 
 const slotHelper = require('./slot-helper');
 const utils = require('./utils');
+const video = require('./video');
 
 /**
  * Top Level Variables
@@ -228,6 +229,7 @@ const contentInit = () => {
             src: 'https://i.forbesimg.com/assets/images/forbes-ad-inspector.png',
         }));
         elWrapper.appendChild(utils.dom('h1', {}, { className: 'gpt-bm__h1' }, 'Ad Inspector'));
+        elWrapper.appendChild(video.initVideo());
         elWrapper.appendChild(utils.dom('h2', {}, { className: 'gpt-bm__h2' }, 'Page Level Targeting'));
 
         for (let j = 0; j < targetkeys.length; j++) {
