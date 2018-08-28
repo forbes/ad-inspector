@@ -30,6 +30,7 @@ const initVideo = () => {
  */
 const handleButtonClick = () => {
     wrapper.innerHTML = header.outerHTML;
+
     setTimeout(() => {
         populatePreroll();
     }, 300);
@@ -40,11 +41,14 @@ const handleButtonClick = () => {
  * @returns {Object} the video player
  */
 const getCurrentPlayer = () => {
-    const players = videojs.players;
+    const players = (window.videojs || {}).players;
     const keys = Object.keys(players);
     const index = keys.length - 1;
     return players[keys[index]];
 };
+
+const creativeBaseUrl = 'https://admanager.google.com/7175#delivery/CreativeDetail/creativeId=';
+const lineItemBaseUrl = 'https://admanager.google.com/7175#delivery/LineItemDetail/lineItemId=';
 
 /**
  * Creates item in the video info list
@@ -52,11 +56,22 @@ const getCurrentPlayer = () => {
  * @param {string[]} value the value(s) to stringify for display
  * @returns {HTMLLIElement} the element for display in list
  */
-const createListItem = (label, value) => {
+const createListItem = (label, values) => {
+    const baseUrl = label.indexOf('Creative') !== -1 ? creativeBaseUrl : lineItemBaseUrl;
     const listItem = utils.dom('li');
-    const stringValue = value.length > 0 ? `${value}`.replace(/,/g, ', ') : 'Not found. If an ad is playing try refresh.';
+    let valuesNode;
+    if (values.length > 0) {
+        valuesNode = utils.dom('div', {}, { 'class': 'gpt-bm__slot-creative'}, null);
+        values.forEach((value) => {
+            const valueNode = utils.dom('a', {}, { 'href': `${baseUrl + value}`}, `${value}`);
+            valuesNode.appendChild(valueNode);
+        });
+    } else {
+        valuesNode = document.createTextNode('Not found. If an ad is playing try refresh.');
+    }
+
     listItem.appendChild(utils.dom('b', {}, {}, `${label}`));
-    listItem.appendChild(document.createTextNode(stringValue));
+    listItem.appendChild(valuesNode);
     
     return listItem;
 };
@@ -88,20 +103,24 @@ const handleError = () => {
  * Populates video section of ad-inspector with video ad data
  */
 const populatePreroll = () => {
+    const videojs = window.videojs;
     if (!videojs) {
         handleError();
         return;
     }
+    
     const currentPlayer = getCurrentPlayer();
     if (!currentPlayer) {
         handleError();
         return;
     }
+    
     const currentAd = currentPlayer.ima3 && currentPlayer.ima3.adsManager ? currentPlayer.ima3.adsManager.getCurrentAd() : false;
     if (!currentAd) {
         handleError();
         return;
     }
+    
     const lineItemIds = (currentAd.getWrapperAdIds() || []).filter(utils.nonEmptyString);
     const creativeId = getCreativeId(currentAd);
     

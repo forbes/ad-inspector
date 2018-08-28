@@ -98,6 +98,9 @@
 .gpt-bm__slot a {
 	color: #003891;
 }
+.gpt-bm__slot-creative a {
+	display: block;
+}
 /* Headers */
 .gpt-bm__h1 {
 	font-size: 40px;
