@@ -1,8 +1,8 @@
 {
-	"manifest_version": 2,
+	"manifest_version": 3,
 	"name": "Forbes Ad Inspector",
 	"description": "This extension monitors GPT ad units and their associated targeting on web pages.",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"browser_action": {
 		"default_icon": "images/icon-128.png"
 	},
