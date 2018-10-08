@@ -47,8 +47,9 @@ const getClientAdIds = (slot) => {
  * Returns link to creative and line item
  * @return {String}
  */
-const getLink = (account, type, id) => {
-    return `https://www.google.com/dfp/${account}#delivery/${type}Detail/${type}Id=${id}`;
+const getLink = (account, type = '', id) => {
+    const propercased = type.charAt(0).toUpperCase() + type.substr(1);
+    return `https://admanager.google.com/${account}#delivery/${propercased}Detail/${type}Id=${id}`;
 };
 
 /**
