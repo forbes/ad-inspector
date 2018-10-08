@@ -13,13 +13,13 @@ let error;
 const initVideo = () => {
     wrapper = utils.dom('div', {}, { className: 'gpt-bm__video' }, '');
     header = utils.dom('h2', {}, { className: 'gpt-bm__h2' }, 'Video Ad Info');
-    button = utils.dom('button', { marginTop: '10px' }, { className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn--black' }, 'Click For Video Ad Info');
+    button = utils.dom('button', null, { className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn--black gpt-bm__btn--video' }, 'Click For Video Ad Info');
     error = utils.dom('p', {}, { className: 'gpt-bm__p--desc' }, '');
     button.addEventListener('click', handleButtonClick);
     wrapper.appendChild(header);
     wrapper.appendChild(button);
 
-    refresh = utils.dom('button', { marginTop: '10px' }, { className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn--black' }, 'Refresh');
+    refresh = utils.dom('button', null, { className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn--black gpt-bm__btn--video' }, 'Refresh');
     refresh.addEventListener('click', handleButtonClick);
     
     return wrapper;
