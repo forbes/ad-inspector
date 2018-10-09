@@ -219,6 +219,8 @@ const contentInit = () => {
 
         const pa = googletag.pubads();
         const slots = pa.getSlots();
+        slotHelper.setAccountNumber(slots);
+        
         const targetkeys = googletag.pubads().getTargetingKeys();
         const targetArr = [];
 

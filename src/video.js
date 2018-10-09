@@ -1,4 +1,5 @@
 const utils = require('./utils');
+const { getLink } = require('./slot-helper');
 
 let header;
 let wrapper;
@@ -13,13 +14,13 @@ let error;
 const initVideo = () => {
     wrapper = utils.dom('div', {}, { className: 'gpt-bm__video' }, '');
     header = utils.dom('h2', {}, { className: 'gpt-bm__h2' }, 'Video Ad Info');
-    button = utils.dom('button', { marginTop: '10px' }, { className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn--black' }, 'Click For Video Ad Info');
+    button = utils.dom('button', null, { className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn--black gpt-bm__btn--video' }, 'Click For Video Ad Info');
     error = utils.dom('p', {}, { className: 'gpt-bm__p--desc' }, '');
     button.addEventListener('click', handleButtonClick);
     wrapper.appendChild(header);
     wrapper.appendChild(button);
 
-    refresh = utils.dom('button', { marginTop: '10px' }, { className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn--black' }, 'Refresh');
+    refresh = utils.dom('button', null, { className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn--black gpt-bm__btn--video' }, 'Refresh');
     refresh.addEventListener('click', handleButtonClick);
     
     return wrapper;
@@ -30,6 +31,7 @@ const initVideo = () => {
  */
 const handleButtonClick = () => {
     wrapper.innerHTML = header.outerHTML;
+
     setTimeout(() => {
         populatePreroll();
     }, 300);
@@ -40,7 +42,7 @@ const handleButtonClick = () => {
  * @returns {Object} the video player
  */
 const getCurrentPlayer = () => {
-    const players = videojs.players;
+    const players = (window.videojs || {}).players;
     const keys = Object.keys(players);
     const index = keys.length - 1;
     return players[keys[index]];
@@ -52,11 +54,23 @@ const getCurrentPlayer = () => {
  * @param {string[]} value the value(s) to stringify for display
  * @returns {HTMLLIElement} the element for display in list
  */
-const createListItem = (label, value) => {
+const createListItem = (label, values) => {
+    const type = label.indexOf('Creative') !== -1 ? 'creative' : 'lineItem';
     const listItem = utils.dom('li');
-    const stringValue = value.length > 0 ? `${value}`.replace(/,/g, ', ') : 'Not found. If an ad is playing try refresh.';
+    let valuesNode;
+    if (values.length > 0) {
+        valuesNode = utils.dom('div', {}, { 'class': 'gpt-bm__slot-creative'}, null);
+        values.forEach((value) => {
+            const href = getLink(type, value);
+            const valueNode = utils.dom('a', {}, { href }, value);
+            valuesNode.appendChild(valueNode);
+        });
+    } else {
+        valuesNode = document.createTextNode('Not found. If an ad is playing try refresh.');
+    }
+
     listItem.appendChild(utils.dom('b', {}, {}, `${label}`));
-    listItem.appendChild(document.createTextNode(stringValue));
+    listItem.appendChild(valuesNode);
     
     return listItem;
 };
@@ -88,20 +102,24 @@ const handleError = () => {
  * Populates video section of ad-inspector with video ad data
  */
 const populatePreroll = () => {
+    const videojs = window.videojs;
     if (!videojs) {
         handleError();
         return;
     }
+    
     const currentPlayer = getCurrentPlayer();
     if (!currentPlayer) {
         handleError();
         return;
     }
+    
     const currentAd = currentPlayer.ima3 && currentPlayer.ima3.adsManager ? currentPlayer.ima3.adsManager.getCurrentAd() : false;
     if (!currentAd) {
         handleError();
         return;
     }
+    
     const lineItemIds = (currentAd.getWrapperAdIds() || []).filter(utils.nonEmptyString);
     const creativeId = getCreativeId(currentAd);
     

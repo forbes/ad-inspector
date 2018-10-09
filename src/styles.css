@@ -75,11 +75,15 @@
   border: 2px solid #000;
 	color: #000;
 }
+.gpt-bm__btn--video {
+	margin-top: 10px;
+}
 .gpt-bm__btn:hover {
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 /* Video */
 .gpt-bm__video {
+	min-height: 100px;
 	width: 100%;
 }
 .gpt-bm__p--desc {
@@ -97,6 +101,9 @@
 }
 .gpt-bm__slot a {
 	color: #003891;
+}
+.gpt-bm__slot-creative a {
+	display: block;
 }
 /* Headers */
 .gpt-bm__h1 {
