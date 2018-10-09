@@ -55,7 +55,7 @@ const getCurrentPlayer = () => {
  * @returns {HTMLLIElement} the element for display in list
  */
 const createListItem = (label, values) => {
-    const type = label.indexOf('Creative') !== -1 ? 'Creative' : 'LineItem';
+    const type = label.indexOf('Creative') !== -1 ? 'creative' : 'lineItem';
     const listItem = utils.dom('li');
     let valuesNode;
     if (values.length > 0) {
