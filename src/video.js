@@ -1,4 +1,5 @@
 const utils = require('./utils');
+const { getLink } = require('./slot-helper');
 
 let header;
 let wrapper;
@@ -47,9 +48,6 @@ const getCurrentPlayer = () => {
     return players[keys[index]];
 };
 
-const creativeBaseUrl = 'https://admanager.google.com/7175#delivery/CreativeDetail/creativeId=';
-const lineItemBaseUrl = 'https://admanager.google.com/7175#delivery/LineItemDetail/lineItemId=';
-
 /**
  * Creates item in the video info list
  * @param {string} label the label for the list item
@@ -57,13 +55,14 @@ const lineItemBaseUrl = 'https://admanager.google.com/7175#delivery/LineItemDeta
  * @returns {HTMLLIElement} the element for display in list
  */
 const createListItem = (label, values) => {
-    const baseUrl = label.indexOf('Creative') !== -1 ? creativeBaseUrl : lineItemBaseUrl;
+    const type = label.indexOf('Creative') !== -1 ? 'Creative' : 'LineItem';
     const listItem = utils.dom('li');
     let valuesNode;
     if (values.length > 0) {
         valuesNode = utils.dom('div', {}, { 'class': 'gpt-bm__slot-creative'}, null);
         values.forEach((value) => {
-            const valueNode = utils.dom('a', {}, { 'href': `${baseUrl + value}`}, `${value}`);
+            const href = getLink(type, value);
+            const valueNode = utils.dom('a', {}, { href }, value);
             valuesNode.appendChild(valueNode);
         });
     } else {
