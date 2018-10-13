@@ -83,7 +83,7 @@ const setButtonBar = (gptLoaded) => {
     if (gptLoaded) {
         topbar.append(swapBtn, refreshBtn, closeBtn);
     } else {
-        topbar.append(closeBtn);
+        topbar.append(refreshBtn, closeBtn);
     }
 
     elWrapper.appendChild(topbar);
@@ -247,8 +247,13 @@ const contentInit = () => {
             slotBuilder(slot);
         }
     } else {
+        elWrapper.appendChild(utils.dom('img', {}, {
+            className: 'gpt-bm__forbes-logo',
+            src: 'https://i.forbesimg.com/assets/images/forbes-ad-inspector.png',
+        }));
         setButtonBar(false);
-        elWrapper.appendChild(utils.dom('h1', {}, { className: 'gpt-bm__h1' }, 'No GPT Ads Found'));
+        elWrapper.appendChild(utils.dom('h1', {}, { className: 'gpt-bm__h1' }, 'Ad Inspector'));
+        elWrapper.appendChild(utils.dom('h2', {}, { className: 'gpt-bm__h2' }, 'No GPT Ads Found'));
     }
 };
 
