@@ -75,9 +75,7 @@
   border: 2px solid #000;
 	color: #000;
 }
-.gpt-bm__btn--video {
-	margin-top: 10px;
-}
+
 .gpt-bm__btn:hover {
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
