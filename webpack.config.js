@@ -16,12 +16,7 @@ module.exports = {
                     path.resolve(__dirname, 'src/background.js'),
                     path.resolve(__dirname, 'src/loader.js'),
                 ],
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['babel-preset-env'],
-                    },
-                },
+                use: 'babel-loader'
             },
             {
                 test: /\.css$/,
