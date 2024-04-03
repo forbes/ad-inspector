@@ -94,8 +94,8 @@ const getCreativeId = (currentAd) => {
 const handleError = () => {
     refresh.innerText = 'Retry'; 
     error.innerHTML = 'There is no video ad data available.';
-    wrapper.appendChild(refresh);
     wrapper.appendChild(error);
+    wrapper.appendChild(refresh);
 };
 
 /**
