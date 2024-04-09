@@ -1,25 +1,26 @@
 .gpt-bm {}
 .gpt-bm__wrapper {
-    background: #fff;
-    border-radius: 10px;
-    border: 5px solid #666;
-    bottom: 10px;
-    overflow: auto;
-    padding: 10px 0;
-    position: fixed;
-    right: 10px;
-    top: 10px;
-    width: 410px;
-    z-index: 10000000000;
+	background: #fff;
+	border-radius: 10px;
+	border: 5px solid #666;
+	bottom: 10px;
+	overflow: auto;
+	padding: 10px 0;
+	position: fixed;
+	right: 10px;
+	top: 10px;
+	width: 410px;
+	z-index: 10000000000;
 }
+
 .gpt-bm__wrapper--left {
-    left: 10px;
-    right: auto;
+	left: 10px;
+	right: auto;
 }
 .gpt-bm__forbes-logo {
-    position: absolute;
-    top: 0;
-    left: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 /* Fonts */
 .gpt-bm__h1,
@@ -27,167 +28,167 @@
 .gpt-bm__h3,
 .gpt-bm li,
 .gpt-bm__btn {
-    font-family: Avenir, "Noto Sans", "Droid Sans", "Helvetica Neue", Helvetica, Arial;
-    font-weight: normal;
+	font-family: Avenir, "Noto Sans", "Droid Sans", "Helvetica Neue", Helvetica, Arial;
+	font-weight: normal;
 }
 /* Buttons */
 .gpt-bm__buttons {
-    align-items: center;
-    display: flex;
-    justify-content: flex-end;
-    padding: 0 10px;
-    position: absolute;
-    right: 0;
-    top: 5px;
+	align-items: center;
+	display: flex;
+	justify-content: flex-end;
+	padding: 0 10px;
+	position: absolute;
+	right: 0;
+	top: 5px;
 }
 .gpt-bm__btn {
-    align-items: center;
-    border-radius: 5px;
-    border: none;
-    box-sizing: border-box;
-    cursor: pointer;
-    display: inline-flex;
-    font-size: 0.875rem;
-    font-weight: bold;
-    justify-content: center;
-    line-height: 1;
-    margin-left: 10px;
-    transition: all 200ms ease;
+	align-items: center;
+	border-radius: 5px;
+	border: none;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: inline-flex;
+	font-size: 0.875rem;
+	font-weight: bold;
+	justify-content: center;
+	line-height: 1;
+	margin-left: 10px;
+	transition: all 200ms ease;
 }
 .gpt-bm__btn.gpt-bm__btn--rect-lg {
-    padding: 1.5em 1em;
+	padding: 1.5em 1em;
 }
 .gpt-bm__btn.gpt-bm__btn--rect-sm {
-    padding: 0.75em 1em;
+	padding: 0.75em 1em;
 }
 .gpt-bm__btn.gpt-bm__btn--square {
-    width: 45px;
-    height: 45px;
-    padding: 1.1em 1em;
+	width: 45px;
+	height: 45px;
+	padding: 1.1em 1em;
 }
 .gpt-bm__btn.gpt-bm__btn--circle {
   width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
+	height: 2rem;
+	border-radius: 50%;
 }
 .gpt-bm__btn.gpt-bm__btn--black {
   background-color: #fff;
   border: 2px solid #000;
-    color: #000;
+	color: #000;
 }
 .gpt-bm__btn--video {
-    margin-top: 10px;
+	margin-top: 10px;
 }
 .gpt-bm__btn:hover {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 /* Video */
 .gpt-bm__video {
-    min-height: 100px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+	min-height: 100px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
 }
 .gpt-bm__p--desc {
-    display: inline;
-    padding-left: 10px;
+	display: inline;
+	padding-left: 10px;
 }
 /* Slots */
 .gpt-bm__slot {
-    cursor: pointer;
-    padding: 10px;
+	cursor: pointer;
+	padding: 10px;
 }
 .gpt-bm__slot:hover {
-    background: white;
-    border-radius: 10px;
+	background: white;
+	border-radius: 10px;
 }
 .gpt-bm__slot a {
-    color: #003891;
+	color: #003891;
 }
 .gpt-bm__slot-creative a {
-    display: block;
+	display: block;
 }
 /* Headers */
 .gpt-bm__h1 {
-    font-size: 40px;
-    line-height: 64px;
-    border-bottom: 1px solid black;
-    margin: 30px 10px 0;
+	font-size: 40px;
+	line-height: 64px;
+	border-bottom: 1px solid black;
+	margin: 30px 10px 0;
 }
 .gpt-bm__h2 {
-    font-size: 32px;
-    line-height: 51.2px;
-    margin-top: 10px;
-    padding-left: 10px;
+	font-size: 32px;
+	line-height: 51.2px;
+	margin-top: 10px;
+	padding-left: 10px;
 }
 .gpt-bm__h3 {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    background: #666;
-    color: #fff;
-    font-size: 24px;
-    line-height: 38.4px;
-    padding: 0 10px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	background: #666;
+	color: #fff;
+	font-size: 24px;
+	line-height: 38.4px;
+	padding: 0 10px;
 }
 .gpt-bm__h3 span {
-    font-size: 12px;
-    margin-left: 10px;
+	font-size: 12px;
+	margin-left: 10px;
 }
 /* Highlights */
 .gpt-bm__highlight {
-    background: rgba(200, 200, 200, 0.5);
-    display: none;
-    border-radius: 10px;
-    position: absolute;
-    z-index: 2;
+	background: rgba(200, 200, 200, 0.5);
+	display: none;
+	border-radius: 10px;
+	position: absolute;
+	z-index: 2;
 }
 .gpt-bm__highlight--visible {
-    display: block;
+	display: block;
 }
 /* Page level */
 .gpt-bm ul {
-    border: 1px solid #666;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    margin: 0 10px;
-    padding: 5px;
+	border: 1px solid #666;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	margin: 0 10px;
+	padding: 5px;
 }
 .gpt-bm .gpt-bm__slot ul {
-    margin: 0;
+	margin: 0;
 }
 .gpt-bm li {
-    font-size: 16px;
-    line-height: 25.6px;
-    word-wrap: break-word;
+	font-size: 16px;
+	line-height: 25.6px;
+	word-wrap: break-word;
 }
 .gpt-bm li b {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 @media (max-width: 480px) {
-    .gpt-bm__wrapper {
-        width: 300px;
-        height: 600px;
-    }
+	.gpt-bm__wrapper {
+		width: 300px;
+		height: 600px;
+	}
 
-    .gpt-bm__h2 {
-        font-size: 20px;
-    }
+	.gpt-bm__h2 {
+		font-size: 20px;
+	}
 
-    .gpt-bm__h3 {
-        font-size: 16px;
-    }
-    
-    .gpt-bm__buttons button:first-child {
-        display: none;
-    }
+	.gpt-bm__h3 {
+		font-size: 16px;
+	}
+	
+	.gpt-bm__buttons button:first-child {
+		display: none;
+	}
 
-    .gpt-bm li {
-        font-size: 14px;
-        line-height: 20px;
-    }
+	.gpt-bm li {
+		font-size: 14px;
+		line-height: 20px;
+	}
 
-    .gpt-bm__video {
-        width: 70%;
-    }
+	.gpt-bm__video {
+		width: 70%;
+	}
 }
