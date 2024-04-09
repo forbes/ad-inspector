@@ -10,7 +10,7 @@ A bookmarklet for monitoring GPT ad units and their associated targeting on web 
 * [Contributors](#contributors)
 
 ## Dev Requirements
-- [Node](https://nodejs.org/en/)
+- [Node] v20.11.1
 - A proxy server like [Charles](https://www.charlesproxy.com/)
 
 ## Installation
