@@ -53,7 +53,7 @@ See Charles setup instructions [here](https://github.com/forbes/ad-inspector/wik
 This tool should work on all pages that utilize GPT Tags. It does not require any supplemental data to be provided in the page.
 
 ## Support
-For any questions or support, please contact Anastasiia Soktoeva directly. Additionally, for immediate assistance, you can reach out to our ADS team.
+For any questions or support, please contact our ADS team.
 
 ## Contributors
 * **Anthony Giallella** - ajg723@gmail.com
