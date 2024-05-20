@@ -131,8 +131,6 @@ const slotBuilder = (slot) => {
     const list = ulBuilder(params);
 
     const slotEl = document.getElementById(slotHelper.getDomId(slot));
-    //Outputting 'slotEl' to aid in debugging for verifying correct selection
-    console.log('slotElements:', slotEl);
 
     if (slotEl != null) {
         const visEl = slotEl.querySelector('iframe') || slotEl;
