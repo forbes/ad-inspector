@@ -157,8 +157,8 @@ const slotBuilder = (slot) => {
 
 const setHighlightStyle = (slotEl, high) => {
     const highStyle = getHighlightStyle(slotEl);
-    const parentWrapper = slotEl.closest('.ribbon-mobile-ad-wrapper');
-    const currentScrollableElement = parentWrapper === null ? slotEl : parentWrapper;
+    const mobileParentWrapper = slotEl.closest('.ribbon-mobile-ad-wrapper');
+    const currentScrollableElement = mobileParentWrapper === null ? slotEl : mobileParentWrapper;
     const position = window.getComputedStyle(currentScrollableElement).position;
 
     if (position === 'fixed') {
@@ -171,8 +171,8 @@ const setHighlightStyle = (slotEl, high) => {
 };
 
 const scrollTo = (element) => {
-    const parentWrapper = element.closest('.ribbon-mobile-ad-wrapper');
-    const currentScrollableElement = parentWrapper === null ? element : parentWrapper;
+    const mobileParentWrapper = element.closest('.ribbon-mobile-ad-wrapper');
+    const currentScrollableElement = mobileParentWrapper === null ? element : mobileParentWrapper;
     const position = window.getComputedStyle(currentScrollableElement).position;
 
     if (position !== 'fixed') {
