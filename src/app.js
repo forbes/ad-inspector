@@ -113,15 +113,6 @@ const refresh = () => {
 };
 
 /**
- * Calculates if element is in view
- * Scrolls window to view if not
- * @param {Object} elOffset
- */
-const scroll = (elOffset) => {
-    window.scroll(0, elOffset - 60);
-};
-
-/**
  * Manages all of the desired data collection and
  * HTML structuring/highlight hover functionality for one ad slot
  * @param {Object} slot
@@ -139,10 +130,12 @@ const slotBuilder = (slot) => {
     head.append(utils.dom('span', {}, {}, name));
     const list = ulBuilder(params);
 
-    if (document.getElementById(slotHelper.getDomId(slot)) != null) {
-        const slotEl = document.getElementById(slotHelper.getDomId(slot));
+    const slotEl = document.getElementById(slotHelper.getDomId(slot));
+
+    if (slotEl != null) {
         const visEl = slotEl.querySelector('iframe') || slotEl;
-        const high = utils.dom('div', getHighlightStyle(visEl), {
+        const highStyle = getHighlightStyle(visEl);
+        const high = utils.dom('div', highStyle, {
             className: 'gpt-bm__highlight',
         });
         el.appendChild(high);
@@ -151,7 +144,8 @@ const slotBuilder = (slot) => {
                 e.classList.remove('gpt-bm__highlight--visible');
             });
             high.classList.add('gpt-bm__highlight--visible');
-            scroll(getOffset(high).top);
+            setHighlightStyle(slotEl, high);
+            scrollTo(slotEl);
         };
         wrap.onclick = select;
     }
@@ -159,6 +153,31 @@ const slotBuilder = (slot) => {
     wrap.appendChild(head);
     wrap.appendChild(list);
     elWrapper.appendChild(wrap);
+};
+
+const setHighlightStyle = (slotEl, high) => {
+    const highStyle = getHighlightStyle(slotEl);
+    const mobileParentWrapper = slotEl.closest('.ribbon-mobile-ad-wrapper');
+    const currentScrollableElement = mobileParentWrapper === null ? slotEl : mobileParentWrapper;
+    const position = window.getComputedStyle(currentScrollableElement).position;
+
+    if (position === 'fixed') {
+        highStyle.position = 'fixed';
+    } else {
+        highStyle.position = 'absolute';
+    }
+
+    utils.setStyle(high, highStyle);
+};
+
+const scrollTo = (element) => {
+    const mobileParentWrapper = element.closest('.ribbon-mobile-ad-wrapper');
+    const currentScrollableElement = mobileParentWrapper === null ? element : mobileParentWrapper;
+    const position = window.getComputedStyle(currentScrollableElement).position;
+
+    if (position !== 'fixed') {
+        window.scrollTo(0, currentScrollableElement.getBoundingClientRect().top + window.scrollY - 60);
+    }
 };
 
 /**
