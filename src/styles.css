@@ -1,6 +1,6 @@
 .gpt-bm {}
 .gpt-bm__wrapper {
-	background: #fff;
+	background: rgba(255, 255, 255, 0.9);
 	border-radius: 10px;
 	border: 5px solid #666;
 	bottom: 10px;
@@ -72,7 +72,6 @@
 	border-radius: 50%;
 }
 .gpt-bm__btn.gpt-bm__btn--black {
-  background-color: #fff;
   border: 2px solid #000;
 	color: #000;
 }
@@ -80,6 +79,7 @@
 	margin-top: 10px;
 }
 .gpt-bm__btn:hover {
+	background-color: rgba(255, 255, 255, 0.4);
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 /* Video */
@@ -99,7 +99,7 @@
 	padding: 10px;
 }
 .gpt-bm__slot:hover {
-	background: white;
+	background: rgba(209, 208, 208, 0.4);
 	border-radius: 10px;
 }
 .gpt-bm__slot a {
