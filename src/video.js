@@ -28,7 +28,10 @@ const initVideo = () => {
  * Button click handler for getting and refreshing video ad info
  */
 const handleButtonClick = () => {
-    wrapper.innerHTML = header.outerHTML;
+    // wrapper.innerHTML = header.outerHTML;
+
+    const videoList = document.querySelectorAll('fbs-video');
+    console.log('videoList', videoList);
 
     setTimeout(() => {
         populatePreroll();
