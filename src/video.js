@@ -1,7 +1,7 @@
 const utils = require('./utils');
 const { getLink } = require('./slot-helper');
 
-let header;
+// let header;
 let wrapper;
 let button;
 let refresh;
@@ -31,7 +31,22 @@ const handleButtonClick = () => {
     // wrapper.innerHTML = header.outerHTML;
 
     const videoList = document.querySelectorAll('fbs-video');
-    console.log('videoList', videoList);
+    
+    if (!videoList || videoList.length === 0) {
+        handleError();
+        return;
+    }
+
+    // videoList.forEach((videoSlot) => {
+    //     const wrap = utils.dom('div', {}, {
+    //         className: 'gpt-bm__slot',
+    //     });
+    //     const name = '(' + videoSlot.querySelector('') + ')';
+    //     const elementId = slot.getSlotElementId();
+    //     const head = utils.dom('h3', {}, { className: 'gpt-bm__h3' }, elementId);
+    //     head.append(utils.dom('span', {}, {}, name));
+    //     // const list = ulBuilder(params);
+    // });
 
     setTimeout(() => {
         populatePreroll();

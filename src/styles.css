@@ -109,7 +109,7 @@
 .gpt-bm_btn--refresh {
 	border: 1px solid black;
 	display: flex;
-	margin: 6px 0 0 0;
+	margin: 6px 0;
 	width: 100%;
 }
 .gpt-bm__p--desc {
@@ -119,6 +119,7 @@
 /* Slots */
 .gpt-bm__slot {
 	cursor: pointer;
+	margin-top: 30px;
 }
 .gpt-bm__slot:hover {
 	border-radius: 10px;
@@ -139,8 +140,13 @@
 .gpt-bm__h2 {
 	font-size: 32px;
 	line-height: 51.2px;
-	margin-top: 10px;
+	margin-top: 20px;
 }
+
+.gpt-bm__h2:nth-of-type(2) {
+	margin-bottom: -30px;
+}
+
 .gpt-bm__h3 {
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;

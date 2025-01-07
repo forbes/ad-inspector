@@ -318,6 +318,8 @@ const contentInit = () => {
             targetArr[targetkeys[j]] = googletag.pubads().getTargeting(targetkeys[j]);
         }
 
+        const templateSubType = (window.forbes && window.forbes['simple-site'].tracking.templateSubType) || '';
+        targetArr.templateSubType = templateSubType;
         elWrapper.appendChild(ulBuilder(targetArr));
 
         elWrapper.appendChild(utils.dom('h2', {}, { className: 'gpt-bm__h2' }, 'Slot Level Targeting'));
