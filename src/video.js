@@ -54,10 +54,14 @@ const buildSlots = (videos) => {
     button.disabled = true;
 };
 
+/**
+ * Formats video information into a list
+ * @param {Object} obj. The video info object 
+ * @param {Number} index. The index of the video element 
+ * @returns list of video information
+ */
 const ulBuilder = (obj, index) => {
     const ulDom = utils.dom('ul');
-
-    console.log('index: ', index);
 
     if (index === 0) {
         ulDom.style.marginTop = '20px';

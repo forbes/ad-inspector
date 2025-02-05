@@ -121,6 +121,9 @@ const refresh = () => {
     contentInit();
 };
 
+/**
+ * Refreshes ad slot that was clicked
+ */
 const refreshAd = () => {
     const refreshBtn = el.querySelectorAll('.gpt-bm_btn--refresh');
     refreshBtn.forEach((btn) => {
@@ -134,30 +137,23 @@ const refreshAd = () => {
                 const position = posElement.textContent.split(' ')[1];
 
                 googletag.pubads().getSlots().forEach((slot) => {
-                    if(slot.getSlotElementId() == slotName) {
-                        // refresh only the clicked ad slot
-                        // get fbs-ad with position="topx"
+                    if (slot.getSlotElementId() == slotName) {
                         const adList = document.querySelectorAll(`fbs-ad[position="${position}"]`);
+
                         adList.forEach((ad) => {
                             const adDiv = ad.querySelector(`div[id="${slotName}"]`);
-
-                            if (adDiv) {
+                            let refreshed = false;
+                            if (adDiv && !refreshed) {
+                                refreshed = true;
                                 ad.refresh();
-                                // TODO tomorrow clean up code, this is firing 2-3 times for some reason
                             }
                             
                         });
                     }
                 });
             }
-            // console.log('TEST: ', slotElement);
         });
     });
-
-    // if (window.googletag && googletag.pubads) {
-
-    //     const pa = googletag.pubads();
-    //     const slots = pa.getSlots();
 };
 
 /**
@@ -177,7 +173,6 @@ const slotBuilder = (slot) => {
     const head = utils.dom('h3', {}, { className: 'gpt-bm__h3' }, elementId);
     head.append(utils.dom('span', {}, {}, name));
     const list = ulBuilder(params);
-
 
     const slotEl = document.getElementById(slotHelper.getDomId(slot));
 

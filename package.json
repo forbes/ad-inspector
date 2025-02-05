@@ -7,8 +7,7 @@
     "build": "npm run lint && webpack",
     "lint": "eslint ./src",
     "start": "http-server ./src/",
-    "watch": "webpack -w",
-    "dev": "npm run build && npm run watch && npm run start"
+    "watch": "webpack -w"
   },
   "keywords": [
     "GPT",
