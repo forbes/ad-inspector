@@ -27,8 +27,6 @@ const initVideo = () => {
  * Button click handler for getting and refreshing video info
  */
 const handleButtonClick = () => {
-    // wrapper.innerHTML = header.outerHTML;
-
     const videoList = document.querySelectorAll('fbs-video');
     
     if (!videoList || videoList.length === 0) {
