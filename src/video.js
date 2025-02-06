@@ -62,7 +62,7 @@ const ulBuilder = (obj, index) => {
     const ulDom = utils.dom('ul');
 
     if (index === 0) {
-        ulDom.style.marginTop = '20px';
+        ulDom.style.marginTop = '10px';
     }
 
     for (let key in obj) {
