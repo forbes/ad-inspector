@@ -1,11 +1,11 @@
 .gpt-bm {}
 .gpt-bm__wrapper {
-	background: #fff;
+	background: rgba(255, 255, 255, 0.9);
 	border-radius: 10px;
 	border: 5px solid #666;
 	bottom: 10px;
 	overflow: auto;
-	padding: 10px 0;
+	padding: 10px;
 	position: fixed;
 	right: 10px;
 	top: 10px;
@@ -16,11 +16,6 @@
 .gpt-bm__wrapper--left {
 	left: 10px;
 	right: auto;
-}
-.gpt-bm__forbes-logo {
-	position: absolute;
-	top: 0;
-	left: 0;
 }
 /* Fonts */
 .gpt-bm__h1,
@@ -37,10 +32,14 @@
 	display: flex;
 	justify-content: flex-end;
 	padding: 0 10px;
-	position: absolute;
 	right: 0;
 	top: 5px;
 }
+
+.gpt-bm__wrapper .gpt-bm__buttons {
+	padding: 0;
+}
+
 .gpt-bm__btn {
 	align-items: center;
 	border-radius: 5px;
@@ -52,7 +51,6 @@
 	font-weight: bold;
 	justify-content: center;
 	line-height: 1;
-	margin-left: 10px;
 	transition: all 200ms ease;
 }
 .gpt-bm__btn.gpt-bm__btn--rect-lg {
@@ -66,15 +64,12 @@
 	height: 45px;
 	padding: 1.1em 1em;
 }
-.gpt-bm__btn.gpt-bm__btn--circle {
-  width: 2rem;
-	height: 2rem;
-	border-radius: 50%;
-}
 .gpt-bm__btn.gpt-bm__btn--black {
-  background-color: #fff;
-  border: 2px solid #000;
-	color: #000;
+  color: #000;
+}
+.gpt-bm__btn-top {
+  width: 2rem;
+  height: 2rem;
 }
 .gpt-bm__btn--video {
 	margin-top: 10px;
@@ -82,24 +77,51 @@
 .gpt-bm__btn:hover {
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
+.gpt-bm__header-container {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+}
+.gpt-bm__swap {
+	background: url('https://www.forbes.com/assets/images/swap-btn.svg') no-repeat left top;
+    background-size: 100% 100%;
+}
+.gpt-bm__refresh {
+	background: url('https://www.forbes.com/assets/images/replay-btn.svg') no-repeat left top;
+	background-size: 100% 100%;
+}
+.gpt-bm__close {
+	background: url('https://www.forbes.com/assets/images/close-btn.svg') no-repeat left top;
+	background-size: 100% 100%;
+}
+.gpt-bm__forbes-logo {
+	padding: 10px 0 5px 0;
+	width: 230px;
+}
 /* Video */
 .gpt-bm__video {
-	min-height: 100px;
-	width: 100%;
 	display: flex;
 	flex-direction: column;
 }
+.gpt-bm__video button {
+	border: 1px solid black;
+}
+.gpt-bm_btn--refresh {
+	border: 1px solid black;
+	display: flex;
+	margin: 6px 0;
+	width: 100%;
+}
 .gpt-bm__p--desc {
-	display: inline;
-	padding-left: 10px;
+	display: inline-block;
+	padding-top: 4px;
 }
 /* Slots */
 .gpt-bm__slot {
 	cursor: pointer;
-	padding: 10px;
+	margin-top: 30px;
 }
 .gpt-bm__slot:hover {
-	background: white;
 	border-radius: 10px;
 }
 .gpt-bm__slot a {
@@ -118,9 +140,13 @@
 .gpt-bm__h2 {
 	font-size: 32px;
 	line-height: 51.2px;
-	margin-top: 10px;
-	padding-left: 10px;
+	margin-top: 20px;
 }
+
+.gpt-bm__h2:nth-of-type(2) {
+	margin-bottom: -30px;
+}
+
 .gpt-bm__h3 {
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
@@ -150,7 +176,8 @@
 	border: 1px solid #666;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
-	margin: 0 10px;
+	font-family: Arial, Helvetica, sans-serif;
+	list-style-type: none;
 	padding: 5px;
 }
 .gpt-bm .gpt-bm__slot ul {
@@ -171,8 +198,18 @@
 		height: 600px;
 	}
 
+	.gpt-bm__forbes-logo {
+		width: 200px
+	}
+
+	.gpt-bm__header-container .gpt-bm__buttons button {
+		width: 25px;
+	}
+
 	.gpt-bm__h2 {
 		font-size: 20px;
+		line-height: 20px;
+		padding: 20px 0 10px 0;
 	}
 
 	.gpt-bm__h3 {
@@ -186,9 +223,5 @@
 	.gpt-bm li {
 		font-size: 14px;
 		line-height: 20px;
-	}
-
-	.gpt-bm__video {
-		width: 70%;
 	}
 }

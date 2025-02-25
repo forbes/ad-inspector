@@ -1,7 +1,5 @@
 const utils = require('./utils');
-const { getLink } = require('./slot-helper');
 
-let header;
 let wrapper;
 let button;
 let refresh;
@@ -13,11 +11,9 @@ let error;
  */
 const initVideo = () => {
     wrapper = utils.dom('div', {}, { className: 'gpt-bm__video' }, '');
-    header = utils.dom('h2', {}, { className: 'gpt-bm__h2' }, 'Video Ad Info');
-    button = utils.dom('button', null, { className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn--black gpt-bm__btn--video' }, 'Click For Video Ad Info');
+    button = utils.dom('button', null, { className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn--black gpt-bm__btn--video' }, 'Video Info');
     error = utils.dom('p', {}, { className: 'gpt-bm__p--desc' }, '');
     button.addEventListener('click', handleButtonClick);
-    wrapper.appendChild(header);
     wrapper.appendChild(button);
 
     refresh = utils.dom('button', null, { className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn--black gpt-bm__btn--video' }, 'Refresh');
@@ -27,65 +23,99 @@ const initVideo = () => {
 };
 
 /**
- * Button click handler for getting and refreshing video ad info
+ * Button click handler for getting and refreshing video info
  */
 const handleButtonClick = () => {
-    wrapper.innerHTML = header.outerHTML;
-
-    setTimeout(() => {
-        populatePreroll();
-    }, 300);
-};
-
-/**
- * Gets the current video player from videojs
- * @returns {Object} the video player
- */
-const getCurrentPlayer = () => {
-    const players = (window.videojs || {}).players;
-    const keys = Object.keys(players);
-    const index = keys.length - 1;
-    return players[keys[index]];
-};
-
-/**
- * Creates item in the video info list
- * @param {string} label the label for the list item
- * @param {string[]} value the value(s) to stringify for display
- * @returns {HTMLLIElement} the element for display in list
- */
-const createListItem = (label, values) => {
-    const type = label.indexOf('Creative') !== -1 ? 'creative' : 'lineItem';
-    const listItem = utils.dom('li');
-    let valuesNode;
-    if (values.length > 0) {
-        valuesNode = utils.dom('div', {}, { 'class': 'gpt-bm__slot-creative'}, null);
-        values.forEach((value) => {
-            const href = getLink(type, value);
-            const valueNode = utils.dom('a', {}, { href }, value);
-            valuesNode.appendChild(valueNode);
-        });
-    } else {
-        valuesNode = document.createTextNode('Not found. If an ad is playing try refresh.');
+    const videoList = document.querySelectorAll('fbs-video');
+    
+    if (!videoList || videoList.length === 0) {
+        handleError();
+        return;
     }
 
-    listItem.appendChild(utils.dom('b', {}, {}, `${label}`));
-    listItem.appendChild(valuesNode);
+    const videoInfo = getVideoInfo(videoList);
+    buildSlots(videoInfo);
+};
+
+const buildSlots = (videos) => {
+    const doc = document.querySelector('.gpt-bm__h2').innerText;
+    if (doc === 'Video Level Info') { return; }
     
-    return listItem;
+    const wrap = wrapper.appendChild(utils.dom('h2', {}, { className: 'gpt-bm__h2' }, 'Video Level Info'));
+    
+
+    videos.forEach((video, index) => {
+        wrap.parentNode.insertBefore(ulBuilder(video, index), wrap.nextSibling);
+    });
+
+    button.disabled = true;
 };
 
 /**
- * Extracts the creative id from current ad object
- * @param {Object} currentAd the ad currently playing
- * @returns {string[]} all values obtained from functions related to getting crative ids
+ * Formats video information into a list
+ * @param {Object} obj. The video info object 
+ * @param {Number} index. The index of the video element 
+ * @returns list of video information
  */
-const getCreativeId = (currentAd) => {
-    const creativeId = currentAd.getCreativeId();
-    return [
-        creativeId, 
-        ...(currentAd.getWrapperCreativeIds() || [])
-    ].filter(utils.nonEmptyString);
+const ulBuilder = (obj, index) => {
+    const ulDom = utils.dom('ul');
+
+    if (index === 0) {
+        ulDom.style.marginTop = '10px';
+    }
+
+    for (let key in obj) {
+        const keyDom = utils.dom('b', {}, {}, `${key}: `);
+        const liDom = utils.dom('li', {}, {});
+
+        liDom.appendChild(keyDom);
+        liDom.appendChild(document.createTextNode(obj[key]));
+        ulDom.appendChild(liDom);
+    }
+
+    return ulDom;
+};
+
+/**
+ * Retreives video info from the video element
+ * @param {Array} videos. The video elements to get info from 
+ * @returns {Object} The video info of
+ */
+const getVideoInfo = (videos) => {
+    const formattedVideos = [];
+
+    videos.forEach((video) => {
+        const adUnitPath = video.getAttribute('ad-unit-path') || '';
+        const playerId = video.getAttribute('player-id') || '';
+        const playerType = video.getAttribute('player-type');
+        const isMuted = video.getAttribute('muted');
+        const isAutoplay = video.getAttribute('autoplay');
+        const keyValueString = video.getAttribute('key-value-string');
+        const videoId = video.getAttribute('video-id') || '';
+        const adsDisabled = video.getAttribute('ads-disabled') || '';
+        const queries = (keyValueString && keyValueString.split('&')) || [];
+
+        const videoInfo = {
+            adUnitPath,
+            playerId,
+            playerType,
+            muted: Boolean(isMuted) || true,
+            adsDisabled: Boolean(adsDisabled) || false,
+            videoId,
+            autoplay: Boolean(isAutoplay) || true,
+            pos: playerType === 'in-body' ? 'vid-iab' : ''
+        };
+
+        queries.forEach((query) => {
+            if (query.indexOf('pos') !== -1) {
+                videoInfo.pos = query.split('=')[1];
+            }
+        });
+
+        formattedVideos.push(videoInfo);
+    });
+
+    return formattedVideos;
 };
 
 /**
@@ -96,44 +126,6 @@ const handleError = () => {
     error.innerHTML = 'There is no video ad data available.';
     wrapper.appendChild(error);
     wrapper.appendChild(refresh);
-};
-
-/**
- * Populates video section of ad-inspector with video ad data
- */
-const populatePreroll = () => {
-    const videojs = window.videojs;
-    if (!videojs) {
-        handleError();
-        return;
-    }
-    
-    const currentPlayer = getCurrentPlayer();
-    if (!currentPlayer) {
-        handleError();
-        return;
-    }
-    
-    const currentAd = currentPlayer.ima3 && currentPlayer.ima3.adsManager ? currentPlayer.ima3.adsManager.getCurrentAd() : false;
-    if (!currentAd) {
-        handleError();
-        return;
-    }
-    
-    const lineItemIds = (currentAd.getWrapperAdIds() || []).filter(utils.nonEmptyString);
-    const creativeId = getCreativeId(currentAd);
-    
-    const videoSection = utils.dom('div', {}, { className: 'gpt-bm__slot' });
-    const list = utils.dom('ul');
-    const lineItems = createListItem('Line Item ID(s): ', lineItemIds);
-    const creativeIds = createListItem('Creative ID(s): ', creativeId);
-    
-    refresh.innerText = 'Refresh';
-    list.appendChild(lineItems);
-    list.appendChild(creativeIds);
-    list.appendChild(refresh);    
-    videoSection.appendChild(list);
-    wrapper.appendChild(videoSection);
 };
 
 module.exports = {

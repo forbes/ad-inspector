@@ -59,22 +59,31 @@ const setButtonBar = (gptLoaded) => {
     const swapBtn = utils.dom(
         'button',
         {},
-        { className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn--black' },
-        'Swap Side',
+        { 
+            className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn-top gpt-bm__btn--black gpt-bm__swap',
+            title: 'Swap Side'
+        },
+        '',
         toggleSide
     );
     const refreshBtn = utils.dom(
         'button',
         {},
-        { className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn--black' },
-        'Refresh',
+        { 
+            className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn-top gpt-bm__btn--black gpt-bm__refresh',
+            title: 'Refresh'
+        },
+        '',
         refresh
     );
     const closeBtn = utils.dom(
         'button',
         {},
-        { className: 'gpt-bm__btn gpt-bm__btn--circle gpt-bm__btn--black' },
-        ' X ',
+        { 
+            className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn-top gpt-bm__btn--black gpt-bm__close',
+            title: 'Close'
+        },
+        '',
         close
     );
     const topbar = utils.dom('div', {}, {
@@ -86,7 +95,7 @@ const setButtonBar = (gptLoaded) => {
         topbar.append(closeBtn);
     }
 
-    elWrapper.appendChild(topbar);
+    elWrapper.querySelector('.gpt-bm__header-container').appendChild(topbar);
 };
 
 /**
@@ -110,6 +119,41 @@ const refresh = () => {
         el.removeChild(e);
     });
     contentInit();
+};
+
+/**
+ * Refreshes ad slot that was clicked
+ */
+const refreshAd = () => {
+    const refreshBtn = el.querySelectorAll('.gpt-bm_btn--refresh');
+    refreshBtn.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            let logOnce = false;
+            const posElement = e.target.parentElement.querySelector('ul').children[0]; // pos
+            const slotElement = e.target.parentElement.querySelector('ul').children[1]; // slotId
+            if (slotElement && !logOnce) {
+                logOnce = true;
+                const slotName = slotElement.textContent.split(' ')[1];
+                const position = posElement.textContent.split(' ')[1];
+
+                googletag.pubads().getSlots().forEach((slot) => {
+                    if (slot.getSlotElementId() == slotName) {
+                        const adList = document.querySelectorAll(`fbs-ad[position="${position}"]`);
+
+                        adList.forEach((ad) => {
+                            const adDiv = ad.querySelector(`div[id="${slotName}"]`);
+                            let refreshed = false;
+                            if (adDiv && !refreshed) {
+                                refreshed = true;
+                                ad.refresh();
+                            }
+                            
+                        });
+                    }
+                });
+            }
+        });
+    });
 };
 
 /**
@@ -152,6 +196,18 @@ const slotBuilder = (slot) => {
 
     wrap.appendChild(head);
     wrap.appendChild(list);
+    const refreshBtn = utils.dom(
+        'button',
+        {},
+        { 
+            className: 'gpt-bm__btn gpt-bm__btn--rect-sm gpt-bm__btn--black gpt-bm_btn--refresh',
+            title: 'Refresh Ad'
+        },
+        'Refresh Ad',
+        refreshAd
+    );
+
+    wrap.appendChild(refreshBtn);
     elWrapper.appendChild(wrap);
 };
 
@@ -243,13 +299,13 @@ const contentInit = () => {
         const targetkeys = googletag.pubads().getTargetingKeys();
         const targetArr = [];
 
+        elWrapper.appendChild(utils.dom('div', {}, { className: 'gpt-bm__header-container'}));
         setButtonBar(true);
 
-        elWrapper.appendChild(utils.dom('img', {}, {
+        elWrapper.querySelector('.gpt-bm__header-container').appendChild(utils.dom('img', {}, {
             className: 'gpt-bm__forbes-logo',
-            src: 'https://i.forbesimg.com/assets/images/forbes-ad-inspector.png',
+            src: 'https://images.forbes.com/assets/images/forbes-ad-inspector-2.png',
         }));
-        elWrapper.appendChild(utils.dom('h1', {}, { className: 'gpt-bm__h1' }, 'Ad Inspector'));
         elWrapper.appendChild(video.initVideo());
         elWrapper.appendChild(utils.dom('h2', {}, { className: 'gpt-bm__h2' }, 'Page Level Targeting'));
 
@@ -257,6 +313,8 @@ const contentInit = () => {
             targetArr[targetkeys[j]] = googletag.pubads().getTargeting(targetkeys[j]);
         }
 
+        const templateSubType = (window.forbes && window.forbes['simple-site'].tracking.templateSubType) || '';
+        targetArr.templateSubType = templateSubType;
         elWrapper.appendChild(ulBuilder(targetArr));
 
         elWrapper.appendChild(utils.dom('h2', {}, { className: 'gpt-bm__h2' }, 'Slot Level Targeting'));

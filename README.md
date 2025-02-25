@@ -43,6 +43,7 @@ To add extension to chrome for local development:
 - After your changes, run `npm run build`
 - Once the build file is finished (loader.js) 
 - Navigate to `chrome://extensions/` in chrome browser
+- Toggle Developer mode to 'On'
 - Select 'Load Unpacked'
 - Select `src` folder of Ad Inspector project, extension will be added to chrome
 
@@ -53,7 +54,7 @@ See Charles setup instructions [here](https://github.com/forbes/ad-inspector/wik
 This tool should work on all pages that utilize GPT Tags. It does not require any supplemental data to be provided in the page.
 
 ## Support
-For any questions or support, please contact our ADS team.
+For any questions or support, please contact our Revenue team.
 
 ## Contributors
 * **Anthony Giallella** - ajg723@gmail.com
@@ -63,3 +64,4 @@ For any questions or support, please contact our ADS team.
 * **Anne Zhou** - azhou@forbes.com
 * **Aaron Romel** - aromel@forbes.com
 * **Anastasiia Soktoeva** - asoktoeva@forbes.com
+* **Gabriel Zacarias** - gzacarias@forbes.com
