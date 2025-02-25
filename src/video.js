@@ -1,6 +1,5 @@
 const utils = require('./utils');
 
-// let header;
 let wrapper;
 let button;
 let refresh;
